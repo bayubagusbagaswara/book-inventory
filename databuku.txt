@@ -1,0 +1,3 @@
+B001, Laskar Pelangi, Novel, 85000
+B002, Fisika Dasar, Pelajaran, 75000
+B003, Sang Pemimpi, Novel, 23000
