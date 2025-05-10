@@ -1,1 +1,1 @@
-B001, Laskar Pelangi, 1, 85000
+C001, Harry Potter, 2, 110000
