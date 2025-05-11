@@ -300,19 +300,19 @@ int main() {
                 inputBuku(daftarBuku, &jumlahBuku); // Memanggil fungsi untuk input buku baru
                 break;
             case 2:
-                tampilkanHistory();
+                tampilkanHistory(); // view history
                 break;
             case 3:
-                tampilkanBuku(daftarBuku, jumlahBuku);
+                tampilkanBuku(daftarBuku, jumlahBuku); // view book
                 break;
             case 4:
-                hapusHistory();
+                hapusHistory(); // delete history
                 break;
             case 5:
-                deleteBuku(daftarBuku, &jumlahBuku);
+                deleteBuku(daftarBuku, &jumlahBuku); // delete book
                 break;
             case 6:
-                inputTransaksi(daftarBuku, jumlahBuku);
+                inputTransaksi(daftarBuku, jumlahBuku); // transaction add
                 break;
             case 7:
                 printf("Keluar dari program.\n");
