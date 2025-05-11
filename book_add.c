@@ -46,7 +46,6 @@ void saveBuku(Buku daftarBuku[], int jumlahBuku) {
     }
 
     fclose(file);
-    printf("Data buku berhasil disimpan.\n");
 }
 
 // Fungsi inputBuku untuk menambah buku baru
@@ -91,6 +90,7 @@ void inputBuku(Buku daftarBuku[], int *jumlahBuku) {
 
     // Simpan buku ke file
     saveBuku(daftarBuku, *jumlahBuku);
+    printf("Data buku berhasil disimpan.\n");
 }
 
 int main() {
