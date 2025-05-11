@@ -1,3 +1,4 @@
-B001;Laskar Pelangi;Novel;85000
-B002;Fisika Dasar;Pelajaran;75000
-C001;Harry Potter;Fiksi;55000
+B001, Laskar Pelangi, Novel, 85000
+B002, Fisika Dasar, Pelajaran, 75000
+C001, Harry Potter, Fiksi, 55000
+C001, Atomic, Self Dev, 80000
