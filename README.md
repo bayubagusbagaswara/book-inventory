@@ -6,11 +6,11 @@ Berikut aturan dalam membuat aplikasinya:
 Pertama kali program dijalankan, program akan membaca file “databuku.txt”. Pada data tersebut terdapat data buku antara lain: kode buku, nama buku, jenis buku, dan harga.
 
 Program memiliki 6 pilihan, yaitu:
-a. Input
+a. Input (Add Book)
 b. View History
 c. View Buku
 d. Delete History
-e. Delete Buku
+e. Delete Buku (Delete Book)
 f. Exit
 
 Keterangan Pilihan tampilan
