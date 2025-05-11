@@ -1,0 +1,3 @@
+[2025-05-11 20:27:36] Kode: C001, Nama: Harry Potter, Jumlah: 5, Total: Rp275000
+[2025-05-11 20:29:50] Kode: C001, Nama: Harry Potter, Jumlah: 8, Total: Rp440000
+[2025-05-11 20:30:37] Kode: B001, Nama: Laskar Pelangi, Jumlah: 75, Total: Rp6375000
