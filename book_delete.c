@@ -45,7 +45,26 @@ void saveBuku(Buku daftarBuku[], int jumlahBuku) {
     }
 
     fclose(file);
-    printf("Data buku berhasil disimpan.\n");
+}
+
+void viewBuku(Buku daftarBuku[], int jumlahBuku) {
+    if (jumlahBuku == 0) {
+        printf("Tidak ada buku yang tersedia.\n");
+        return;
+    }
+
+    printf("\n%-5s | %-10s | %-30s | %-20s | %-10s\n", 
+           "No", "Kode", "Nama Buku", "Jenis Buku", "Harga");
+    printf("-------------------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < jumlahBuku; i++) {
+        printf("%-5d | %-10s | %-30s | %-20s | Rp.%-8d\n",
+               i + 1, 
+               daftarBuku[i].kode, 
+               daftarBuku[i].nama,
+               daftarBuku[i].jenis, 
+               daftarBuku[i].harga);
+    }
 }
 
 void deleteBuku(Buku daftarBuku[], int *jumlahBuku) {
@@ -53,6 +72,10 @@ void deleteBuku(Buku daftarBuku[], int *jumlahBuku) {
         printf("Tidak ada buku untuk dihapus.\n");
         return;
     }
+
+    // Tampilkan daftar buku terlebih dahulu
+    printf("\n=============================== Daftar Buku =========================================\n");
+    viewBuku(daftarBuku, *jumlahBuku);
 
     char kodeHapus[10];
     printf("Masukkan kode buku yang ingin dihapus: ");
@@ -77,6 +100,7 @@ void deleteBuku(Buku daftarBuku[], int *jumlahBuku) {
     } else {
         // Simpan ulang ke file
         saveBuku(daftarBuku, *jumlahBuku);
+        printf("Data buku berhasil diupdate.\n");
     }
 }
 
