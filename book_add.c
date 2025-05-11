@@ -62,6 +62,7 @@ void inputBuku(Buku daftarBuku[], int *jumlahBuku) {
     Buku bukuBaru;
     
     // Minta input dari pengguna
+    printf("\n=============== Input Buku ===================\n");
     printf("\nMasukkan Kode Buku: ");
     scanf("%s", bukuBaru.kode);
     printf("Masukkan Nama Buku: ");
@@ -80,6 +81,21 @@ void inputBuku(Buku daftarBuku[], int *jumlahBuku) {
 
     printf("Masukkan Harga Buku: ");
     scanf("%d", &bukuBaru.harga);
+
+    int kodeSudahAda = 0;
+
+    // Cek apakah kode sudah ada
+    for (int i = 0; i < *jumlahBuku; i++) {
+        if (strcmp(daftarBuku[i].kode, bukuBaru.kode) == 0) {
+            kodeSudahAda = 1;
+            break;
+        }
+    }
+
+    if (kodeSudahAda) {
+        printf("Kode buku '%s' sudah digunakan. Gunakan kode lain.\n", bukuBaru.kode);
+        return;
+    }
 
     // Simpan buku baru ke array daftarBuku
     // Menyimpan bukuBaru ke array daftarBuku di posisi terakhir.
