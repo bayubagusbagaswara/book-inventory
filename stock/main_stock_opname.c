@@ -94,7 +94,7 @@ void catatHistory(const char *kode, const char *nama, int jumlah, int totalHarga
     const char *tipeStr = (tipe == MASUK) ? "MASUK" : "KELUAR";
 
     // Tulis ke file
-    fprintf(file, "[%s] [%s] Kode: %s, Nama: %s, Jumlah: %d, Total: Rp.%d\n",
+    fprintf(file, "%s, %s, %s, %s, %d, %d\n",
             tanggal, tipeStr, kode, nama, jumlah, totalHarga);
 
     fclose(file);
