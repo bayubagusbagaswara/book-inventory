@@ -50,8 +50,9 @@ void viewHistory() {
     }
 
     // Tampilkan header kolom
+    printf("\n==================================== List History Buku =================================================\n");
     printf("\n%-5s | %-20s | %-10s | %-10s | %-20s | %-7s | %-10s\n", 
-           "No", "Waktu", "Aksi", "Kode", "Nama Buku", "Jumlah", "Total (Rp.)");
+           "No", "Waktu", "Aksi", "Kode", "Nama Buku", "Jumlah", "Total (Rp)");
     printf("------------------------------------------------------------------------------------------------------\n");
 
     // Tampilkan semua data history
@@ -66,7 +67,6 @@ void viewHistory() {
                histories[i].total);
     }
 }
-
 
 void deleteHistory() {
     FILE *file = fopen("history.txt", "r");
@@ -97,24 +97,12 @@ void deleteHistory() {
         return;
     }
 
-    // Menampilkan history terlebih dahulu
-    printf("\n%-5s | %-20s | %-10s | %-10s | %-30s | %-7s | %-10s\n", 
-           "No", "Waktu", "Aksi", "Kode", "Nama Buku", "Jumlah", "Total (Rp.)");
-    printf("-----------------------------------------------------------------------------------------------\n");
-    for (int i = 0; i < jumlahData; i++) {
-        printf("%-5d | %-20s | %-10s | %-10s | %-30s | %-7d | %-10d\n",
-               i + 1,
-               histories[i].waktu,
-               histories[i].aksi,
-               histories[i].kode,
-               histories[i].nama,
-               histories[i].jumlah,
-               histories[i].total);
-    }
+    printf("\n==================================== Menu: Hapus History =================================================\n");
+    viewHistory();
 
     // Meminta input index untuk dihapus
     int index;
-    printf("\nMasukkan index data yang ingin dihapus: ");
+    printf("Pilih index data yang ingin dihapus (1 - %d): ", jumlahData);
     scanf("%d", &index);
 
     if (index < 1 || index > jumlahData) {
@@ -123,10 +111,10 @@ void deleteHistory() {
     }
 
     // Menulis ulang data ke file kecuali data yang dihapus
-    file = fopen("history.txt", "w");
+    FILE *newFile = fopen("history.txt", "w");
     for (int i = 0; i < jumlahData; i++) {
         if (i != index - 1) {
-            fprintf(file, "%s, %s, %s, %s, %d, %d\n",
+            fprintf(newFile, "%s, %s, %s, %s, %d, %d\n",
                     histories[i].waktu,
                     histories[i].aksi,
                     histories[i].kode,
@@ -135,7 +123,7 @@ void deleteHistory() {
                     histories[i].total);
         }
     }
-    fclose(file);
+    fclose(newFile);
 
     printf("Data berhasil dihapus.\n");
 }
