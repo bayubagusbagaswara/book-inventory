@@ -2,3 +2,5 @@
 [2025-05-12 12:15:24] [MASUK] Kode: B001, Nama: Laskar Pelangi, Jumlah: 20, Total: Rp.1700000
 [2025-05-12 12:18:22] [KELUAR] Kode: B002, Nama: Fisika Dasar, Jumlah: 25, Total: Rp.1875000
 [2025-05-12 12:18:50] [MASUK] Kode: C001, Nama: Harry Potter, Jumlah: 12, Total: Rp.660000
+[2025-05-12 12:44:21] [MASUK] Kode: B002, Nama: Fisika Dasar, Jumlah: 30, Total: Rp.1650000
+[2025-05-12 12:45:42] [MASUK] Kode: B001, Nama: Laskar Pelangi, Jumlah: 34, Total: Rp.2890000
