@@ -161,11 +161,11 @@ void viewBuku(Buku daftarBuku[], int jumlahBuku) {
 
     printf("\n==================================== List Data Buku =================================================\n");
     printf("\n%-5s | %-10s | %-30s | %-20s | %-11s | %-5s\n", 
-           "No", "Kode", "Nama Buku", "Jenis Buku", "Harga", "Stok");
+           "No", "Kode", "Nama Buku", "Jenis Buku", "Harga (Rp)", "Stok");
     printf("------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < jumlahBuku; i++) {
-        printf("%-5d | %-10s | %-30s | %-20s | Rp.%-8d | %-5d\n",
+        printf("%-5d | %-10s | %-30s | %-20s | %-8d | %-5d\n",
                i + 1, 
                daftarBuku[i].kode, 
                daftarBuku[i].nama,
