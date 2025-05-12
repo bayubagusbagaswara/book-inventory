@@ -55,6 +55,31 @@ void saveBuku(Buku daftarBuku[], int jumlahBuku) {
     fclose(file);
 }
 
+void catatHistory(const char *kode, const char *nama, int jumlah, int totalHarga, TipeTransaksi tipe) {
+    FILE *file = fopen("history.txt", "a");  // mode append
+    if (!file) {
+        printf("Gagal membuka file history.txt\n");
+        return;
+    }
+
+    // Ambil waktu sekarang
+    time_t now = time(NULL);
+    struct tm *t = localtime(&now);
+
+    // Format tanggal
+    char tanggal[100];
+    strftime(tanggal, sizeof(tanggal), "%Y-%m-%d %H:%M:%S", t);
+
+    // Konversi tipe transaksi ke string
+    const char *tipeStr = (tipe == MASUK) ? "MASUK" : "KELUAR";
+
+    // Tulis ke file
+    fprintf(file, "[%s] [%s] Kode: %s, Nama: %s, Jumlah: %d, Total: Rp.%d\n",
+            tanggal, tipeStr, kode, nama, jumlah, totalHarga);
+
+    fclose(file);
+}
+
 void inputBuku(Buku daftarBuku[], int *jumlahBuku) {
     if (*jumlahBuku >= MAX_BUKU) {
         printf("Buku sudah penuh. Tidak dapat menambah buku baru.\n");
@@ -101,6 +126,10 @@ void inputBuku(Buku daftarBuku[], int *jumlahBuku) {
     (*jumlahBuku)++;
 
     saveBuku(daftarBuku, *jumlahBuku);
+
+    catatHistory(bukuBaru.kode, bukuBaru.nama, bukuBaru.stok,
+             bukuBaru.stok * bukuBaru.harga, MASUK);
+
     printf("Data buku berhasil disimpan.\n");
 }
 
