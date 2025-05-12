@@ -1,11 +1,15 @@
-// Pada sell book juga akan menginputkan ke history transaksi
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>  // Untuk mencatat waktu transaksi
 
 #define MAX_BUKU 100
+
+typedef enum {
+    MASUK,
+    KELUAR
+} TipeTransaksi;
+
 
 typedef struct {
     char kode[10];
@@ -75,7 +79,7 @@ void viewBuku(Buku daftarBuku[], int jumlahBuku) {
     }
 }
 
-void catatHistory(const char *kode, const char *nama, int jumlah, int totalHarga) {
+void catatHistory(const char *kode, const char *nama, int jumlah, int totalHarga, TipeTransaksi tipe) {
     FILE *file = fopen("history.txt", "a");  // mode append
     if (!file) {
         printf("Gagal membuka file history.txt\n");
@@ -90,9 +94,12 @@ void catatHistory(const char *kode, const char *nama, int jumlah, int totalHarga
     char tanggal[100];
     strftime(tanggal, sizeof(tanggal), "%Y-%m-%d %H:%M:%S", t);
 
+    // Konversi tipe transaksi ke string
+    const char *tipeStr = (tipe == MASUK) ? "MASUK" : "KELUAR";
+
     // Tulis ke file
-    fprintf(file, "[%s] Kode: %s, Nama: %s, Jumlah: %d, Total: Rp%d\n",
-            tanggal, kode, nama, jumlah, totalHarga);
+    fprintf(file, "[%s] [%s] Kode: %s, Nama: %s, Jumlah: %d, Total: Rp.%d\n",
+            tanggal, tipeStr, kode, nama, jumlah, totalHarga);
 
     fclose(file);
 }
@@ -123,12 +130,13 @@ void jualBuku(Buku daftarBuku[], int *jumlahBuku) {
                 printf("Stok tidak cukup. Stok tersedia: %d\n", daftarBuku[i].stok);
             } else {
                 daftarBuku[i].stok -= jumlahJual;
-                printf("Penjualan berhasil. Sisa stok: %d\n", daftarBuku[i].stok);
                 saveBuku(daftarBuku, *jumlahBuku);
 
                 // Catat ke file history
                 catatHistory(daftarBuku[i].kode, daftarBuku[i].nama, jumlahJual,
-                jumlahJual * daftarBuku[i].harga);
+                jumlahJual * daftarBuku[i].harga, KELUAR);
+                
+                printf("Penjualan berhasil. Sisa stok: %d\n", daftarBuku[i].stok);
             }
             break;
         }
