@@ -4,6 +4,11 @@
 
 #define MAX_BUKU 100
 
+typedef enum {
+    MASUK,
+    KELUAR
+} TipeTransaksi;
+
 typedef struct {
     char kode[10];
     char nama[100];
