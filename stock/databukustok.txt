@@ -1,2 +1,2 @@
-B001, Laskar Pelangi, Novel, 85000, 62
-B002, Fisika Dasar, Pelajaran, 55000, 30
+B001, Laskar Pelangi, Novel, 85000, 43
+B002, Fisika Dasar, Pelajaran, 55000, 24
