@@ -50,10 +50,10 @@ void viewHistory() {
     }
 
     // Tampilkan header kolom
-    printf("\n==================================== List History Buku =================================================\n");
+    printf("\n==================================== List History =============================================\n");
     printf("\n%-5s | %-20s | %-10s | %-10s | %-20s | %-7s | %-10s\n", 
            "No", "Waktu", "Aksi", "Kode", "Nama Buku", "Jumlah", "Total (Rp)");
-    printf("------------------------------------------------------------------------------------------------------\n");
+    printf("----------------------------------------------------------------------------------------------------\n");
 
     // Tampilkan semua data history
     for (int i = 0; i < jumlahData; i++) {
@@ -125,9 +125,8 @@ void deleteHistory() {
     }
     fclose(newFile);
 
-    printf("Data berhasil dihapus.\n");
+    printf("Data history successfully deleted.\n");
 }
-
 
 
 int main() {
