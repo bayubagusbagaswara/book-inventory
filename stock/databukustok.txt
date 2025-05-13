@@ -1,2 +1,5 @@
 B001, Laskar Pelangi, Novel, 85000, 43
 B002, Fisika Dasar, Pelajaran, 55000, 24
+B004, Atomic, Self Development, 99000, 20
+B006, Matematika, Pelajaran, 65000, 13
+B007, Software Design, Pelajaran, 75000, 20
