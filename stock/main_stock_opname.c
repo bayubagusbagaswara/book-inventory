@@ -20,14 +20,25 @@ typedef struct {
     int stok;
 } Buku;
 
+typedef struct {
+    char waktu[20];
+    char aksi[10]; // "KELUAR" atau "MASUK"
+    char kode[10];
+    char nama[50];
+    int jumlah;
+    int total;
+} History;
+
 void tampilkanMenu() {
-    printf("\n==================================== Menu Utama Toko Buku ================================================\n");
+    printf("\n==================================== Menu Utama ================================================\n");
     printf("1. Input Buku\n");
     printf("2. View Buku\n");
     printf("3. Delete Buku\n");
     printf("4. Input Transaksi\n");
-    printf("5. Exit\n");
-    printf("Pilih menu (1-5): ");
+    printf("5. View History\n");
+    printf("6. Delete History\n");
+    printf("7. Keluar\n");
+    printf("Pilih menu (1-7): ");
 }
 
 int kembaliKeMenuUtama() {
@@ -108,7 +119,7 @@ void inputBuku(Buku daftarBuku[], int *jumlahBuku) {
 
     Buku bukuBaru;
     
-    printf("\n=============== Input Buku ===================\n");
+    printf("\n==================================== Menu Input Buku ===========================================\n");
     printf("\nMasukkan Kode Buku: ");
     scanf("%s", bukuBaru.kode);
     printf("Masukkan Nama Buku: ");
@@ -159,13 +170,13 @@ void viewBuku(Buku daftarBuku[], int jumlahBuku) {
         return;
     }
 
-    printf("\n==================================== List Data Buku =================================================\n");
+    printf("\n==================================== List Data Buku ============================================\n");
     printf("\n%-5s | %-10s | %-30s | %-20s | %-11s | %-5s\n", 
            "No", "Kode", "Nama Buku", "Jenis Buku", "Harga (Rp)", "Stok");
     printf("------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < jumlahBuku; i++) {
-        printf("%-5d | %-10s | %-30s | %-20s | %-8d | %-5d\n",
+        printf("%-5d | %-10s | %-30s | %-20s | %-11d | %-5d\n",
                i + 1, 
                daftarBuku[i].kode, 
                daftarBuku[i].nama,
@@ -238,7 +249,7 @@ void deleteBuku(Buku daftarBuku[], int *jumlahBuku) {
         return;
     }
 
-    printf("\n==================================== Menu: Hapus Buku ================================================\n");
+    printf("\n==================================== Menu: Hapus Buku ==========================================\n");
     viewBuku(daftarBuku, *jumlahBuku);
 
     int index;
@@ -259,13 +270,123 @@ void deleteBuku(Buku daftarBuku[], int *jumlahBuku) {
 
     saveBuku(daftarBuku, *jumlahBuku);
 
-    printf("Data successfully deleted.\n");
+    printf("Data buku successfully deleted.\n");
 }
+
+void viewHistory() {
+    FILE *file = fopen("history.txt", "r");
+    if (file == NULL) {
+        printf("Belum ada history.\n");
+        return;
+    }
+
+    History histories[100];
+    int jumlahData = 0;
+    char baris[256];
+
+    // Membaca file dan simpan ke struct
+    while (fgets(baris, sizeof(baris), file)) {
+        sscanf(baris, "%[^,], %[^,], %[^,], %[^,], %d, %d",
+               histories[jumlahData].waktu,
+               histories[jumlahData].aksi,
+               histories[jumlahData].kode,
+               histories[jumlahData].nama,
+               &histories[jumlahData].jumlah,
+               &histories[jumlahData].total);
+        jumlahData++;
+    }
+    fclose(file);
+
+    if (jumlahData == 0) {
+        printf("Belum ada history.\n");
+        return;
+    }
+
+    // Tampilkan header kolom
+    printf("\n==================================== List History ==================================================\n");
+    printf("\n%-5s | %-20s | %-10s | %-10s | %-20s | %-7s | %-10s\n", 
+           "No", "Waktu", "Aksi", "Kode", "Nama Buku", "Jumlah", "Total (Rp)");
+    printf("----------------------------------------------------------------------------------------------------\n");
+
+    // Tampilkan semua data history
+    for (int i = 0; i < jumlahData; i++) {
+        printf("%-5d | %-20s | %-10s | %-10s | %-20s | %-7d | %-10d\n",
+               i + 1,
+               histories[i].waktu,
+               histories[i].aksi,
+               histories[i].kode,
+               histories[i].nama,
+               histories[i].jumlah,
+               histories[i].total);
+    }
+}
+
+void deleteHistory() {
+    FILE *file = fopen("history.txt", "r");
+    if (file == NULL) {
+        printf("Belum ada history.\n");
+        return;
+    }
+
+    History histories[100];
+    int jumlahData = 0;
+    char baris[256];
+
+    // Membaca semua data ke dalam array of struct
+    while (fgets(baris, sizeof(baris), file)) {
+        sscanf(baris, "%[^,], %[^,], %[^,], %[^,], %d, %d",
+               histories[jumlahData].waktu,
+               histories[jumlahData].aksi,
+               histories[jumlahData].kode,
+               histories[jumlahData].nama,
+               &histories[jumlahData].jumlah,
+               &histories[jumlahData].total);
+        jumlahData++;
+    }
+    fclose(file);
+
+    if (jumlahData == 0) {
+        printf("Tidak ada history yang bisa dihapus.\n");
+        return;
+    }
+
+    printf("\n==================================== Menu: Hapus History ===========================================\n");
+    viewHistory();
+
+    // Meminta input index untuk dihapus
+    int index;
+    printf("Pilih index data yang ingin dihapus (1 - %d): ", jumlahData);
+    scanf("%d", &index);
+
+    if (index < 1 || index > jumlahData) {
+        printf("Index tidak valid.\n");
+        return;
+    }
+
+    // Menulis ulang data ke file kecuali data yang dihapus
+    FILE *newFile = fopen("history.txt", "w");
+    for (int i = 0; i < jumlahData; i++) {
+        if (i != index - 1) {
+            fprintf(newFile, "%s, %s, %s, %s, %d, %d\n",
+                    histories[i].waktu,
+                    histories[i].aksi,
+                    histories[i].kode,
+                    histories[i].nama,
+                    histories[i].jumlah,
+                    histories[i].total);
+        }
+    }
+    fclose(newFile);
+
+    printf("Data history successfully deleted.\n");
+}
+
 
 int main() {
     Buku daftarBuku[MAX_BUKU];
     int jumlahBuku = loadBuku(daftarBuku, MAX_BUKU);
 
+    printf("\n==================================== Toko Buku =================================================\n");
     printf("Total buku berhasil dimuat: %d\n", jumlahBuku);
 
     int pilihan;
@@ -295,12 +416,22 @@ int main() {
                 } while (!kembaliKeMenuUtama());
                 break;
             case 5:
+                do {
+                    viewHistory();
+                } while (!kembaliKeMenuUtama());
+                break;
+            case 6:
+                do {
+                    deleteHistory();
+                } while (!kembaliKeMenuUtama());
+                break;
+            case 7:
                 printf("Keluar dari program.\n");
                 break;
             default:
                 printf("Pilihan tidak valid.\n");
         }
-    } while (pilihan != 5);
+    } while (pilihan != 7);
 
     return 0;
 }
