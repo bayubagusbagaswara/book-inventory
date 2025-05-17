@@ -1,8 +1,14 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include <ctype.h>
+// Anggota Kelompok:
+// 1. BAYU BAGUS BAGASWARA - 2802641312
+// 2. I MADE BUDIAWAN - 2802640152
+// 3. NOVA DWI SETYA - 2802642826
+// 4. MRISKI PADILA - 2802639056
+
+#include <stdio.h> // Header file untuk input/output
+#include <string.h> // Header file untuk string
+#include <stdlib.h> // Header file untuk fungsi umum
+#include <time.h> // Header file untuk waktu
+#include <ctype.h> // Header file untuk fungsi karakter
 
 #define MAX_BUKU 100
 
