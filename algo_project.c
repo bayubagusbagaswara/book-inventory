@@ -2,7 +2,7 @@
 // 1. BAYU BAGUS BAGASWARA - 2802641312
 // 2. I MADE BUDIAWAN - 2802640152
 // 3. NOVA DWI SETYA - 2802642826
-// 4. MRISKI PADILA - 2802639056
+// 4. RISKI PADILA - 2802639056
 
 #include <stdio.h> // Header file untuk input/output
 #include <string.h> // Header file untuk string
