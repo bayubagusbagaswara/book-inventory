@@ -1,0 +1,2 @@
+B002, Fisika Dasar, Pelajaran, 55000, 2025-05-13 11:13:07
+B004, Atomic, Self Development, 99000, 2025-05-13 11:18:51
